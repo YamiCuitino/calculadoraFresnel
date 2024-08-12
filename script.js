@@ -1,19 +1,15 @@
 function calcularFresnel() {
-    let d = document.getElementById('distancia').value;
-    let f = document.getElementById('frecuencia').value;
+    const distancia = parseFloat(document.getElementById('distancia').value);
+    const frecuencia = parseFloat(document.getElementById('frecuencia').value);
 
-    if (d === '' || f === '') {
-        alert('Por favor, ingrese valores válidos.');
+    if (isNaN(distancia) || isNaN(frecuencia) || distancia <= 0 || frecuencia <= 0) {
+        document.getElementById('resultado').textContent = "Por favor, ingrese valores válidos para la distancia y la frecuencia.";
         return;
     }
 
-    d = parseFloat(d);
-    f = parseFloat(f);
+    // Formula Zona de Fresnel
+    const fresnelZone = 17.32 * Math.sqrt((distancia / 4) / frecuencia);
 
-
-
-    let fresnel = 17.32 * Math.sqrt((d / 4) / f);
-
-    document.getElementById('resultado').innerText = 
-        `La zona de Fresnel es: ${fresnel.toFixed(2)} metros`;
+    // Mostrar resultado
+    document.getElementById('resultado').textContent = `La Zona de Fresnel es de ${fresnelZone.toFixed(2)} metros.`;
 }
